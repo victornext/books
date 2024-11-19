@@ -8,9 +8,13 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class BooksService {
@@ -24,8 +28,23 @@ public class BooksService {
         return ResponseEntity.status(HttpStatus.CREATED).body(repositorio.save(booksmodel));
     }
 
+
+
+
     public ResponseEntity<List<BooksModel>> FindAll() {
         return ResponseEntity.status(HttpStatus.OK).body(repositorio.findAll());
     }
 
+
+
+    public ResponseEntity<Object> Delete(UUID id) {
+        Optional<BooksModel> books0 = repositorio.findById(id);
+        if(books0.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro");
+        }
+        repositorio.delete(books0.get());
+        return ResponseEntity.status(HttpStatus.OK).body("Sucesso!!");
+
+    }
 }
+

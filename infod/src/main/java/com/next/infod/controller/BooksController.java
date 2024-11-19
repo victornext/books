@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 public class BooksController {
@@ -24,17 +25,21 @@ public class BooksController {
     BooksService services;
 
 
-    @PostMapping(value = "/autores" )
+    @PostMapping(value = "/create" )
     public ResponseEntity<BooksModel> create(@RequestBody @Valid BooksDTO DTO){
         return services.Create(DTO);
     }
 
 
-    @GetMapping(value = "/getAll")
+    @GetMapping(value = "/findAll")
     public ResponseEntity<List<BooksModel>> findAll(){
         return services.FindAll();
     }
 
 
+    @DeleteMapping(value = "/delete/{id}")
+    ResponseEntity<Object> Delete(@PathVariable(value = "id") UUID id){
+        return services.Delete(id);
+    }
 
 }
