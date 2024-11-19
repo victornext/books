@@ -4,6 +4,8 @@ package com.next.infod.controller;
 
 import com.next.infod.DTOS.AutorDTO;
 import com.next.infod.DTOS.BooksDTO;
+import com.next.infod.DTOS.ErrorResponse;
+import com.next.infod.exceptions.ArquivoDuplicado;
 import com.next.infod.model.BooksModel;
 import com.next.infod.services.BooksService;
 import jakarta.validation.Valid;
@@ -26,8 +28,15 @@ public class BooksController {
 
 
     @PostMapping(value = "/create" )
-    public ResponseEntity<BooksModel> create(@RequestBody @Valid BooksDTO DTO){
-        return services.Create(DTO);
+    public ResponseEntity<?> create(@RequestBody @Valid BooksDTO DTO){
+        try {
+
+
+            return services.Create(DTO);
+        } catch(ArquivoDuplicado e) {
+            var ErroDTO = ErrorResponse.conflito(e.getMessage());
+            return ResponseEntity.status(ErroDTO.status()).body(ErroDTO);
+        }
     }
 
 
