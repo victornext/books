@@ -3,13 +3,12 @@ package com.next.infod.services;
 import com.next.infod.DTOS.BooksDTO;
 import com.next.infod.model.BooksModel;
 import com.next.infod.repositories.BooksRepository;
-import org.apache.coyote.Response;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 import java.util.Objects;
@@ -25,7 +24,8 @@ public class BooksService {
     public ResponseEntity<BooksModel> Create(BooksDTO books) {
         var booksmodel = new BooksModel();
         BeanUtils.copyProperties(books, booksmodel);
-        return ResponseEntity.status(HttpStatus.CREATED).body(repositorio.save(booksmodel));
+        BooksModel savedBook = repositorio.save(booksmodel);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedBook);
     }
 
 
@@ -58,6 +58,34 @@ public class BooksService {
 
         return ResponseEntity.status(HttpStatus.OK).body(books0.get());
 
+    }
+
+    public ResponseEntity<Object> update(UUID id, BooksDTO books) {
+        Optional<BooksModel> books0 = repositorio.findById(id);
+
+        if(books0.isEmpty()){
+           return ResponseEntity.status(HttpStatus.NOT_FOUND).body("ERRO, Não encontrado");
+        }
+
+        var booksModel = books0.get();
+        BeanUtils.copyProperties(books, booksModel);
+        return ResponseEntity.status(HttpStatus.OK).body(repositorio.save(booksModel));
+    }
+
+
+    public List<BooksModel> pesquisa (String autor, String nationality) {
+        if(autor != null && nationality != null) {
+            return repositorio.findByAutorAndNationality(autor, nationality);
+        }
+
+        if(autor != null ) {
+            return repositorio.findByAutor(autor);
+        }
+        if(nationality != null ) {
+            return repositorio.findByNationality(nationality);
+        }
+
+        return repositorio.findAll();
     }
 }
 
