@@ -8,11 +8,11 @@ import com.next.infod.repositories.BooksRepository;
 import com.next.infod.services.BooksService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.config.RepositoryNameSpaceHandler;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class BooksController {
@@ -29,6 +29,11 @@ public class BooksController {
         return services.Create(DTO);
     }
 
+
+    @GetMapping(value = "/getAll")
+    public ResponseEntity<List<BooksModel>> findAll(){
+        return services.FindAll();
+    }
 
 
 
