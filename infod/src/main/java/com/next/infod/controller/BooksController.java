@@ -42,4 +42,9 @@ public class BooksController {
         return services.Delete(id);
     }
 
+
+    @GetMapping(value =  "get/{id}")
+    public ResponseEntity<Object> findById(@PathVariable(value = "id") UUID id) {
+        return services.findById(id);
+    }
 }

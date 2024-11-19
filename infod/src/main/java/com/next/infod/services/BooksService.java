@@ -46,5 +46,18 @@ public class BooksService {
         return ResponseEntity.status(HttpStatus.OK).body("Sucesso!!");
 
     }
+
+
+
+    public ResponseEntity<Object> findById(UUID id) {
+        Optional<BooksModel> books0 = repositorio.findById(id);
+        if(books0.isEmpty()){
+            System.out.println("Livro não encontrado");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("ERRO");
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(books0.get());
+
+    }
 }
 
