@@ -2,15 +2,16 @@ package com.next.infod.controller;
 
 
 
-import com.next.infod.DTOS.AutorDTO;
 import com.next.infod.DTOS.BooksDTO;
 import com.next.infod.DTOS.ErrorResponse;
 import com.next.infod.exceptions.ArquivoDuplicado;
+import com.next.infod.exceptions.NaoAutorizadaException;
 import com.next.infod.model.BooksModel;
 import com.next.infod.services.BooksService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,17 +29,27 @@ public class BooksController {
 
 
     @PostMapping(value = "/create" )
-    public ResponseEntity<?> create(@RequestBody @Valid BooksDTO DTO){
+    public ResponseEntity<?> create(@RequestBody @Valid BooksDTO books){
         try {
 
 
-            return services.Create(DTO);
+            return services.Create(books);
         } catch(ArquivoDuplicado e) {
             var ErroDTO = ErrorResponse.conflito(e.getMessage());
             return ResponseEntity.status(ErroDTO.status()).body(ErroDTO);
         }
     }
 
+
+    @PutMapping(value = "update/{id}")
+    public ResponseEntity<?> update(@PathVariable(value = "id") UUID id, @RequestBody @Valid BooksDTO books) {
+        try {
+        return services.update(id, books); }
+        catch(ArquivoDuplicado e) {
+            var ErroDTO = ErrorResponse.conflito(e.getMessage());
+            return ResponseEntity.status(ErroDTO.status()).body(ErroDTO);
+        }
+    }
 
     @GetMapping(value = "/findAll")
     public ResponseEntity<List<BooksModel>> findAll(){
@@ -57,11 +68,6 @@ public class BooksController {
         return services.findById(id);
     }
 
-    @PutMapping(value = "put/{id}")
-    public ResponseEntity<Object> update(@PathVariable(value = "id") UUID id, @RequestBody @Valid BooksDTO books) {
-        return services.update(id, books);
-    }
-
     @GetMapping(value = "/pesquisa")
     public ResponseEntity<List<BooksDTO>> pesquisar(
             @RequestParam(value ="autor", required = false) String autor,
@@ -75,5 +81,6 @@ public class BooksController {
                 .collect(Collectors.toList());
         return ResponseEntity.ok(lista);
     }
+
 
 }

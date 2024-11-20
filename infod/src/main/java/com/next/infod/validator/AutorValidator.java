@@ -1,7 +1,7 @@
 package com.next.infod.validator;
 
-
 import com.next.infod.exceptions.ArquivoDuplicado;
+import com.next.infod.exceptions.Illegal;
 import com.next.infod.model.BooksModel;
 import com.next.infod.repositories.BooksRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,25 +14,58 @@ public class AutorValidator {
     @Autowired
     private BooksRepository repositorio;
 
-
-    public void validar(BooksModel autor){
-        if(existeAutor(autor)) {
-            throw new ArquivoDuplicado("Autor Ja Cadastrado!");
+    public void validar(BooksModel autor) {
+        validarNulos(autor); // Validação contra campos nulos
+        dadosIguais(autor); // Verifica se o autor é igual ao autor existente
+        if (existeAutor(autor)) {
+            throw new ArquivoDuplicado("Autor Já Cadastrado!");
         }
     }
 
-    private boolean existeAutor(BooksModel autor){
+    private void dadosIguais(BooksModel autor) {
+        // Verifica se o nome do autor já está registrado no banco
         Optional<BooksModel> autorFinded = repositorio.findByAutorAndNascimentoAndNationality(
                 autor.getAutor(),
                 autor.getNascimento(),
-                autor.getNationality());
+                autor.getNationality()
+        );
 
+        if (autorFinded.isPresent()) {
+            BooksModel existingAutor = autorFinded.get();
 
-        if(autor.getId() == null) {
+            // Se o autor enviado for igual ao já registrado, gera a exceção
+            if (autor.getAutor().equals(existingAutor.getAutor())) {
+                throw new Illegal("O autor não pode ser igual ao autor já existente!");
+            }
+        }
+    }
+
+    private void validarNulos(BooksModel autor) {
+        if (autor == null) {
+            throw new Illegal("O objeto Autor não pode ser nulo");
+        }
+        if (autor.getAutor() == null || autor.getAutor().isBlank()) {
+            throw new Illegal("O campo 'autor' não pode ser nulo ou vazio");
+        }
+        if (autor.getNascimento() == null) {
+            throw new Illegal("O campo 'nascimento' não pode ser nulo");
+        }
+        if (autor.getNationality() == null || autor.getNationality().isBlank()) {
+            throw new Illegal("O campo 'nationality' não pode ser nulo ou vazio");
+        }
+    }
+
+    private boolean existeAutor(BooksModel autor) {
+        Optional<BooksModel> autorFinded = repositorio.findByAutorAndNascimentoAndNationality(
+                autor.getAutor(),
+                autor.getNascimento(),
+                autor.getNationality()
+        );
+
+        if (autor.getId() == null) {
             return autorFinded.isPresent();
         }
 
-        return !autor.getId().equals(autorFinded.get().getId()) && autorFinded.isPresent();
+        return autorFinded.isPresent() && !autor.getId().equals(autorFinded.get().getId());
     }
-
 }
