@@ -1,7 +1,6 @@
 package com.next.infod.services;
 
 import com.next.infod.DTOS.BooksDTO;
-import com.next.infod.exceptions.NaoAutorizadaException;
 import com.next.infod.model.BooksModel;
 import com.next.infod.repositories.BooksRepository;
 import com.next.infod.validator.AutorValidator;

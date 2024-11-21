@@ -1,32 +1,57 @@
 package com.next.infod.controller.commom;
 
 
-import com.next.infod.DTOS.ErroDTO;
-import com.next.infod.DTOS.RespostadeErro;
+
+import com.next.infod.exceptions.ArquivoDuplicado;
+
+import com.next.infod.exceptions.Illegal;
+import com.next.infod.exceptions.NaoAutorizadaException;
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.FieldError;
-import org.springframework.web.ErrorResponse;
-import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.util.List;
-import java.util.stream.Collectors;
+
+import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
+
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public RespostadeErro handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
-        List<FieldError> fieldErrors = e.getFieldErrors();
-        List<ErroDTO> listaErros = fieldErrors.stream()
-                .map(fe -> new ErroDTO(fe.getField(), fe.getDefaultMessage()))
-                .collect(Collectors.toList());
+    @ExceptionHandler(ArquivoDuplicado.class)
+    public ResponseEntity<?> handleArquivoDuplicado(ArquivoDuplicado e) {
+        Map<String, Object> body = new HashMap<>();
+        body.put("timestamp: ", LocalDateTime.now());
+        body.put("status: ", HttpStatus.CONFLICT.value());
+        body.put("error", "Conflict");
+        body.put("message:", e.getMessage());
 
-        return new RespostadeErro(
-                HttpStatus.UNPROCESSABLE_ENTITY.value(), "Erro de validação", listaErros);
+        return new ResponseEntity<>(body, HttpStatus.CONFLICT);
     }
 
 
+    @ExceptionHandler(Illegal.class)
+    public ResponseEntity<?> handleArquivosIlegais(Illegal e) {
+        Map<String, Object> body = new HashMap<>();
+        body.put("timestamp: ", LocalDateTime.now());
+        body.put("status: ", HttpStatus.CONFLICT.value());
+        body.put("error", "Conflict");
+        body.put("message:", e.getMessage());
+
+        return new ResponseEntity<>(body, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(NaoAutorizadaException.class)
+    public ResponseEntity<?> handlerNãoAutorizada(NaoAutorizadaException e) {
+        Map<String, Object> body = new HashMap<>();
+        body.put("timestamp: ", LocalDateTime.now());
+        body.put("status: ", HttpStatus.CONFLICT.value());
+        body.put("error", "Conflict");
+        body.put("message:", e.getMessage());
+
+        return new ResponseEntity<>(body, HttpStatus.CONFLICT);
+    }
 }
 
