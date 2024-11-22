@@ -1,7 +1,6 @@
 package com.next.infod.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
@@ -10,13 +9,12 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.UUID;
 
 @Entity
 @Table(name = "tb_book")
 @Data
-@ToString(exclude = "livros")
+@ToString(exclude = "Livro")
 @EntityListeners(AuditingEntityListener.class)
 public class BooksModel {
 

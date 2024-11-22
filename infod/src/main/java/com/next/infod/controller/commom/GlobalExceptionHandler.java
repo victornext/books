@@ -5,6 +5,7 @@ package com.next.infod.controller.commom;
 import com.next.infod.exceptions.ArquivoDuplicado;
 
 import com.next.infod.exceptions.Illegal;
+import com.next.infod.exceptions.LivroNaoEncontrado;
 import com.next.infod.exceptions.NaoAutorizadaException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -52,6 +53,18 @@ public class GlobalExceptionHandler {
         body.put("message:", e.getMessage());
 
         return new ResponseEntity<>(body, HttpStatus.CONFLICT);
+    }
+
+
+    @ExceptionHandler(LivroNaoEncontrado.class)
+    public ResponseEntity<?> handlerNãoEncontrado(LivroNaoEncontrado e){
+        Map<String, Object> body = new HashMap<>();
+        body.put("timestamp: ", LocalDateTime.now());
+        body.put("status: ", HttpStatus.NOT_FOUND.value());
+        body.put("error", "Não encontrado");
+        body.put("message:", e.getMessage());
+
+        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
 }
 

@@ -7,6 +7,8 @@ import com.next.infod.validator.AutorValidator;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -93,22 +95,22 @@ public class BooksService {
 
 
 
-    public List<BooksModel> pesquisa (String autor, String nationality) {
-        if(autor != null && nationality != null) {
-            return repositorio.findByAutorAndNationality(autor, nationality);
-        }
 
-        if(autor != null ) {
-            return repositorio.findByAutor(autor);
-        }
-        if(nationality != null ) {
-            return repositorio.findByNationality(nationality);
-        }
 
-        return repositorio.findAll();
+
+    public List<BooksModel> PesquisaByExample(String autor, String nationality){
+        var booksModel = new BooksModel();
+        booksModel.setAutor(autor);
+        booksModel.setNationality(nationality);
+
+        ExampleMatcher matcher = ExampleMatcher
+                .matching()
+                .withIgnoreNullValues()
+                .withIgnoreCase()
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+        Example<BooksModel> autorExample= Example.of(booksModel, matcher);
+           return repositorio.findAll(autorExample);
     }
-
-
 
 }
 

@@ -8,6 +8,7 @@ import com.next.infod.exceptions.ArquivoDuplicado;
 import com.next.infod.model.BooksModel;
 import com.next.infod.services.BooksService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -18,6 +19,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
+@RequiredArgsConstructor
 public class BooksController {
 
 
@@ -64,7 +66,7 @@ public class BooksController {
     public ResponseEntity<List<BooksDTO>> pesquisar(
             @RequestParam(value ="autor", required = false) String autor,
             @RequestParam(value = "nationality", required = false) String nationality) {
-        List<BooksModel> resultado = services.pesquisa(autor, nationality);
+        List<BooksModel> resultado = services.PesquisaByExample(autor, nationality);
         List<BooksDTO> lista = resultado.stream()
                 .map(book -> new BooksDTO(
                         book.getAutor(),
