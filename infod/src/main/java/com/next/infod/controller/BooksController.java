@@ -19,6 +19,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
+@RequestMapping("autor")
 @RequiredArgsConstructor
 public class BooksController {
 

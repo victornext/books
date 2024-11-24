@@ -3,6 +3,9 @@ package com.next.infod.model;
 
 import com.next.infod.Enums.GeneroLivro;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
@@ -26,10 +29,14 @@ public class Livro {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+
+    @NotBlank
     @Column(name = "isbn", length = 20, nullable = false)
     private String isbn;
 
-    @Column(name = "titulo", length = 150, nullable = false)
+    @NotBlank
+    @Column(name = "titulo", nullable = false)
+    @Size(min = 2, max = 150)
     private String titulo;
 
 
@@ -42,6 +49,7 @@ public class Livro {
     private GeneroLivro genero;
 
     @Column(name = "preco", precision = 18, scale = 2)
+    @NotNull
     private BigDecimal preco;
 
     @ManyToOne(

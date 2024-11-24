@@ -7,6 +7,7 @@ import com.next.infod.controller.LivroController;
 import com.next.infod.exceptions.LivroNaoEncontrado;
 import com.next.infod.model.Livro;
 import com.next.infod.repositories.LivroRepository;
+import com.next.infod.validator.LivroValidator;
 import lombok.AllArgsConstructor;
 import org.apache.coyote.Response;
 import org.springframework.beans.BeanUtils;
@@ -26,12 +27,15 @@ import java.util.UUID;
 public class LivroService {
     @Autowired
     private final LivroRepository repositorio;
-
+    @Autowired
+    private final LivroValidator validator;
 
     public ResponseEntity<Livro> create (CadastroLivroDTO cadastro){
         var livro = new Livro();
         BeanUtils.copyProperties(cadastro, livro);
-        return ResponseEntity.status(HttpStatus.CREATED).body(repositorio.save(livro));
+        //validator.validar(livro);
+        Livro savedLivro = repositorio.save(livro);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedLivro);
 
     }
 

@@ -1,6 +1,8 @@
 package com.next.infod.services;
 
 import com.next.infod.DTOS.BooksDTO;
+import com.next.infod.exceptions.ArquivoDuplicado;
+import com.next.infod.exceptions.LivroNaoEncontrado;
 import com.next.infod.model.BooksModel;
 import com.next.infod.repositories.BooksRepository;
 import com.next.infod.validator.AutorValidator;
@@ -43,8 +45,8 @@ public class BooksService {
     public ResponseEntity<Object> update(UUID id, BooksDTO books) {
         Optional<BooksModel> books0 = repositorio.findById(id);
 
-        if(books0.isEmpty()){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("ERRO, Não encontrado");
+        if(books0.isEmpty()) {
+            throw new LivroNaoEncontrado("Não encontrado");
         }
 
         var booksModel = books0.get();
@@ -66,7 +68,7 @@ public class BooksService {
     public ResponseEntity<Object> Delete(UUID id) {
         Optional<BooksModel> books0 = repositorio.findById(id);
         if(books0.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro");
+            throw new LivroNaoEncontrado("Não encontrado");
         }
         repositorio.delete(books0.get());
         return ResponseEntity.status(HttpStatus.OK).body("Sucesso!!");

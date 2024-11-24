@@ -6,6 +6,7 @@ import com.next.infod.services.LivroService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,15 +16,17 @@ import java.util.UUID;
 @RestController
 @RequestMapping("livros")
 @RequiredArgsConstructor
+@Validated
 public class LivroController {
 
     private final LivroService service;
 
 
     @PostMapping("/create")
-    public ResponseEntity<Livro> create (@RequestBody @Valid CadastroLivroDTO cadastro) {
-       return service.create(cadastro);
+    public ResponseEntity<Livro> create(@RequestBody @Valid CadastroLivroDTO cadastro) {
+        return service.create(cadastro);
     }
+
 
     @GetMapping("/findall")
     public ResponseEntity<List<Livro>> findAll() {
