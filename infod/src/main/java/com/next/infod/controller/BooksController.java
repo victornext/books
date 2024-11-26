@@ -12,9 +12,11 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Repository;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -22,7 +24,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("autores")
 @RequiredArgsConstructor
-public class BooksController {
+public class BooksController implements GenericController {
 
     private final BooksMapper mapper;
     private final BooksService services;
@@ -31,7 +33,11 @@ public class BooksController {
     @PostMapping(value = "/create" )
     public ResponseEntity<?> create(@RequestBody @Valid BooksDTO dto){
         BooksModel books = mapper.toEntity(dto);
-        return services.Create(books);
+        services.Create(books);
+
+        URI location = gerarHeaderLocation(books.getId());
+
+        return ResponseEntity.created(location).build();
     }
 
 

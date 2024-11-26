@@ -27,7 +27,7 @@ public interface LivroRepository extends JpaRepository<Livro, UUID>, JpaSpecific
     List<Livro> findByBooks(BooksModel autor); // Corrigido para refletir o relacionamento correto
 
     // select * from livro where titulo = titulo
-    List<Livro> findByTitulo(String titulo);
+    Optional<Livro> findByTitulo(String titulo);
 
     Optional<Livro> findByIsbnAndTituloAndGeneroAndPreco(String isbn, String titulo, GeneroLivro genero, BigDecimal preco);
 

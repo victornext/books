@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -18,7 +19,7 @@ import java.util.UUID;
 @RequestMapping("livros")
 @RequiredArgsConstructor
 @Validated
-public class LivroController {
+public class LivroController implements GenericController {
 
     private final LivroService service;
     private final LivroMapper mapper;
@@ -26,7 +27,11 @@ public class LivroController {
     @PostMapping("/create")
     public ResponseEntity<Livro> create(@RequestBody @Valid CadastroLivroDTO dto) {
         Livro livro = mapper.toEntity(dto);
-        return service.create(livro);
+        service.create(livro);
+
+        URI url = gerarHeaderLocation(livro.getId());
+
+        return ResponseEntity.created(url).build();
     }
 
 
