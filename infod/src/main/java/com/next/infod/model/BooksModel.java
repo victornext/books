@@ -2,19 +2,24 @@ package com.next.infod.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "tb_book")
-@Data
-@ToString(exclude = "Livro")
+@Table(name = "tb_book", schema = "public")
+@Getter
+@Setter
+@ToString(exclude = "livros")
 @EntityListeners(AuditingEntityListener.class)
 public class BooksModel {
 
@@ -30,6 +35,10 @@ public class BooksModel {
     @Column(nullable = false, length = 50)
     private String nationality;
 
+    @OneToMany(mappedBy = "books", fetch = FetchType.LAZY)
+    @JsonManagedReference // Marca o lado "mestre" da relação
+    private List<Livro> livros;
+
     @CreatedDate
     @Column(name = "data_cadastro")
     private LocalDateTime registerData;
@@ -37,7 +46,6 @@ public class BooksModel {
     @LastModifiedDate
     @Column(name =  "data_atualizacao")
     private LocalDateTime dataAtualizacao;
-
 
     public BooksModel() {}
 }

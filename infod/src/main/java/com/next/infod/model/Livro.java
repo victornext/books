@@ -1,6 +1,5 @@
 package com.next.infod.model;
 
-
 import com.next.infod.Enums.GeneroLivro;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -11,6 +10,7 @@ import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -20,7 +20,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "livro")
 @Data
-@ToString(exclude = "BooksModel")
+@ToString(exclude = "books")
 @EntityListeners(AuditingEntityListener.class)
 public class Livro {
 
@@ -28,7 +28,6 @@ public class Livro {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-
 
     @NotBlank
     @Column(name = "isbn", length = 20, nullable = false)
@@ -38,7 +37,6 @@ public class Livro {
     @Column(name = "titulo", nullable = false)
     @Size(min = 2, max = 150)
     private String titulo;
-
 
     @CreatedDate
     @Column(name = "data_publicacao")
@@ -52,17 +50,13 @@ public class Livro {
     @NotNull
     private BigDecimal preco;
 
-    @ManyToOne(
-//            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
-    )
+    @ManyToOne(fetch = FetchType.LAZY)  // Relação ManyToOne com BooksModel
     @JoinColumn(name = "tb_books")
+    @JsonBackReference // Marca o lado "dependente" da relação
     private BooksModel books;
-
 
     @LastModifiedDate
     @Column(name = "data_atualizacao")
     private LocalDateTime dataAtualizacao;
-
 
 }

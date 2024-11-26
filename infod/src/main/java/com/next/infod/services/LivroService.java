@@ -1,7 +1,7 @@
 package com.next.infod.services;
 
 
-import com.next.infod.DTOS.CadastroLivroDTO;
+import com.next.infod.controller.DTOS.CadastroLivroDTO;
 import com.next.infod.Enums.GeneroLivro;
 import com.next.infod.controller.LivroController;
 import com.next.infod.exceptions.LivroNaoEncontrado;
@@ -30,14 +30,13 @@ public class LivroService {
     @Autowired
     private final LivroValidator validator;
 
-    public ResponseEntity<Livro> create (CadastroLivroDTO cadastro){
-        var livro = new Livro();
-        BeanUtils.copyProperties(cadastro, livro);
-        //validator.validar(livro);
-        Livro savedLivro = repositorio.save(livro);
-        return ResponseEntity.status(HttpStatus.CREATED).body(savedLivro);
+    public ResponseEntity<Livro> create(Livro cadastro) {
+        //Persistindo no repositório
+        Livro savedLivro = repositorio.save(cadastro);
 
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedLivro);
     }
+
 
 
     public ResponseEntity<List<Livro>> findAll() {

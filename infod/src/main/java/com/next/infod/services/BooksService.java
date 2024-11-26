@@ -1,6 +1,6 @@
 package com.next.infod.services;
 
-import com.next.infod.DTOS.BooksDTO;
+import com.next.infod.controller.DTOS.BooksDTO;
 import com.next.infod.exceptions.ArquivoDuplicado;
 import com.next.infod.exceptions.LivroNaoEncontrado;
 import com.next.infod.model.BooksModel;
@@ -31,10 +31,10 @@ public class BooksService {
     private  final AutorValidator validator;
 
 
-    public ResponseEntity<BooksModel> Create(BooksDTO books) {
+    public ResponseEntity<BooksModel> Create(BooksModel books) {
         var booksmodel = new BooksModel();
         BeanUtils.copyProperties(books, booksmodel);
-        validator.validar(booksmodel);
+        //validator.validar(booksmodel);
         BooksModel savedBook = repositorio.save(booksmodel);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedBook);
     }
@@ -42,7 +42,7 @@ public class BooksService {
 
 
 
-    public ResponseEntity<Object> update(UUID id, BooksDTO books) {
+    public ResponseEntity<Object> update(UUID id, BooksModel books) {
         Optional<BooksModel> books0 = repositorio.findById(id);
 
         if(books0.isEmpty()) {

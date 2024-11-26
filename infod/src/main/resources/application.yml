@@ -12,6 +12,3 @@ spring:
       ddl-auto: update
     properties:
       hibernate.format_sql: true
-  mvc:
-    throw-exception-if-no-handler-found: true
-    validate-on-default: true

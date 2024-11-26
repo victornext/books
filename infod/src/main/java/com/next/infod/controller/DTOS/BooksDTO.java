@@ -1,4 +1,4 @@
-package com.next.infod.DTOS;
+package com.next.infod.controller.DTOS;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

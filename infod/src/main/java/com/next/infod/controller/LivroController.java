@@ -1,6 +1,7 @@
 package com.next.infod.controller;
 
-import com.next.infod.DTOS.CadastroLivroDTO;
+import com.next.infod.controller.DTOS.CadastroLivroDTO;
+import com.next.infod.controller.mappers.LivroMapper;
 import com.next.infod.model.Livro;
 import com.next.infod.services.LivroService;
 import jakarta.validation.Valid;
@@ -20,11 +21,12 @@ import java.util.UUID;
 public class LivroController {
 
     private final LivroService service;
-
+    private final LivroMapper mapper;
 
     @PostMapping("/create")
-    public ResponseEntity<Livro> create(@RequestBody @Valid CadastroLivroDTO cadastro) {
-        return service.create(cadastro);
+    public ResponseEntity<Livro> create(@RequestBody @Valid CadastroLivroDTO dto) {
+        Livro livro = mapper.toEntity(dto);
+        return service.create(livro);
     }
 
 

@@ -15,7 +15,6 @@ public class AutorValidator {
     private BooksRepository repositorio;
 
     public void validar(BooksModel autor) {
-        validarNulos(autor); // Validação contra campos nulos
         dadosIguais(autor); // Verifica se o autor é igual ao autor existente
         if (existeAutor(autor)) {
             throw new ArquivoDuplicado("Autor Já Cadastrado!");
@@ -40,20 +39,6 @@ public class AutorValidator {
         }
     }
 
-    private void validarNulos(BooksModel autor) {
-        if (autor == null) {
-            throw new Illegal("O objeto Autor não pode ser nulo");
-        }
-        if (autor.getAutor() == null || autor.getAutor().isBlank()) {
-            throw new Illegal("O campo 'autor' não pode ser nulo ou vazio");
-        }
-        if (autor.getNascimento() == null) {
-            throw new Illegal("O campo 'nascimento' não pode ser nulo");
-        }
-        if (autor.getNationality() == null || autor.getNationality().isBlank()) {
-            throw new Illegal("O campo 'nationality' não pode ser nulo ou vazio");
-        }
-    }
 
     private boolean existeAutor(BooksModel autor) {
         Optional<BooksModel> autorFinded = repositorio.findByAutorAndNascimentoAndNationality(

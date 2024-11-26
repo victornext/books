@@ -2,8 +2,9 @@ package com.next.infod.controller;
 
 
 
-import com.next.infod.DTOS.BooksDTO;
-import com.next.infod.DTOS.ErrorResponse;
+import com.next.infod.controller.DTOS.BooksDTO;
+import com.next.infod.controller.DTOS.ErrorResponse;
+import com.next.infod.controller.mappers.BooksMapper;
 import com.next.infod.exceptions.ArquivoDuplicado;
 import com.next.infod.model.BooksModel;
 import com.next.infod.services.BooksService;
@@ -19,26 +20,25 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("autor")
+@RequestMapping("autores")
 @RequiredArgsConstructor
 public class BooksController {
 
-
-
-
-    @Autowired
-    BooksService services;
+    private final BooksMapper mapper;
+    private final BooksService services;
 
 
     @PostMapping(value = "/create" )
-    public ResponseEntity<?> create(@RequestBody @Valid BooksDTO books){
+    public ResponseEntity<?> create(@RequestBody @Valid BooksDTO dto){
+        BooksModel books = mapper.toEntity(dto);
         return services.Create(books);
     }
 
 
     @PutMapping(value = "update/{id}")
-    public ResponseEntity<?> update(@PathVariable(value = "id") UUID id, @RequestBody @Valid BooksDTO books) {
+    public ResponseEntity<?> update(@PathVariable(value = "id") UUID id, @RequestBody @Valid BooksDTO dto) {
         try {
+            BooksModel books = mapper.toEntity(dto);
         return services.update(id, books); }
         catch(ArquivoDuplicado e) {
             var ErroDTO = ErrorResponse.conflito(e.getMessage());
@@ -69,11 +69,7 @@ public class BooksController {
             @RequestParam(value = "nationality", required = false) String nationality) {
         List<BooksModel> resultado = services.PesquisaByExample(autor, nationality);
         List<BooksDTO> lista = resultado.stream()
-                .map(book -> new BooksDTO(
-                        book.getAutor(),
-                        book.getNascimento(),
-                        book.getNationality())) // Mapeia para o DTO
-                .collect(Collectors.toList());
+                .map(mapper::toDTO).collect(Collectors.toList());
         return ResponseEntity.ok(lista);
     }
 

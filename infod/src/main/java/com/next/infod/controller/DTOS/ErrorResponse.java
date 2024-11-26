@@ -1,4 +1,4 @@
-package com.next.infod.DTOS;
+package com.next.infod.controller.DTOS;
 
 
 import org.springframework.http.HttpStatus;

@@ -1,4 +1,4 @@
-package com.next.infod.DTOS;
+package com.next.infod.controller.DTOS;
 
 import com.next.infod.Enums.GeneroLivro;
 
