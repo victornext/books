@@ -50,8 +50,21 @@ public class LivroController implements GenericController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> update(@PathVariable(value = "id") UUID id, @RequestBody @Valid CadastroLivroDTO DTO){
-        return service.update(id, DTO);
+    public ResponseEntity<?> update(@PathVariable(value = "id") String id, @RequestBody @Valid CadastroLivroDTO DTO){
+        return service.obterPorId(UUID.fromString(id))
+                .map(livro -> {
+                    Livro entidadeAux = mapper.toEntity(DTO);
+                    livro.setDataPublicacao(entidadeAux.getDataPublicacao());
+                    livro.setIsbn(entidadeAux.getIsbn());
+                    livro.setPreco(entidadeAux.getPreco());
+                    livro.setGenero(entidadeAux.getGenero());
+                    livro.setTitulo(entidadeAux.getTitulo());
+                    livro.setBooks(entidadeAux.getBooks());
+
+                    service.update(livro);
+
+                    return ResponseEntity.noContent().build();
+                }).orElseGet( () -> ResponseEntity.notFound().build());
     }
 
 

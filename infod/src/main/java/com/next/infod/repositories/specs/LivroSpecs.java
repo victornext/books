@@ -26,4 +26,13 @@ public class LivroSpecs {
         return (root, query, cb) ->
                 cb.equal(cb.function("to_char", String.class, root.get("dataPublicacao"), cb.literal("YYYY")), anoPublicacao.toString());
     }
+
+
+    public static Specification<Livro> NomeAutorLike(String autor){
+        return (root, query, cb) -> {
+            return cb.like(cb.upper(root.get("books").get("autor")), "%" + autor.toUpperCase() + "%");
+
+        };
+    }
+
 }

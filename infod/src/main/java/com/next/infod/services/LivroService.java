@@ -4,6 +4,7 @@ package com.next.infod.services;
 import com.next.infod.controller.DTOS.CadastroLivroDTO;
 import com.next.infod.Enums.GeneroLivro;
 import com.next.infod.controller.LivroController;
+import com.next.infod.exceptions.Illegal;
 import com.next.infod.exceptions.LivroNaoEncontrado;
 import com.next.infod.model.Livro;
 import com.next.infod.repositories.LivroRepository;
@@ -57,16 +58,13 @@ public class LivroService {
     }
 
 
-    public ResponseEntity<Object> update(UUID id, CadastroLivroDTO DTO) {
-        Optional<Livro> livro0 = repositorio.findById(id);
-        if(livro0.isEmpty()){
-            throw new LivroNaoEncontrado("Livro não localizado!    ID: "+ id);
+    public ResponseEntity<Object> update(Livro livro) {
+        if (livro.getId() == null) {
+            throw new Illegal("Para atualizar o livro tem que estar na base!");
         }
 
-        var LivroModel=livro0.get();
-        BeanUtils.copyProperties(DTO, LivroModel);
-
-        return ResponseEntity.status(HttpStatus.OK).body(repositorio.save(LivroModel));
+        repositorio.save(livro);
+        return ResponseEntity.ok().build();
     }
 
 
@@ -110,6 +108,10 @@ public class LivroService {
 
         if(anoPublicacao != null) {
             specs = specs.and(LivroSpecs.AnoPublicacaoEqual(anoPublicacao));
+        }
+
+        if(autor != null) {
+            specs = specs.and(LivroSpecs.NomeAutorLike(autor));
         }
 
         Specification<Livro> isbnEqual = (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get("isbn"), isbn);
