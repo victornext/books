@@ -77,4 +77,9 @@ public class LivroService {
         repositorio.delete(livro0.get());
         return ResponseEntity.status(HttpStatus.OK).body("Objeto deletado com sucesso!!");
     }
+
+
+    public Optional<Livro> obterPorId(UUID id){
+        return repositorio.findById(id);
+    }
 }

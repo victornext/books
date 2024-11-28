@@ -4,7 +4,6 @@ package com.next.infod.controller.mappers;
 import com.next.infod.controller.DTOS.BooksDTO;
 import com.next.infod.model.BooksModel;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface BooksMapper {

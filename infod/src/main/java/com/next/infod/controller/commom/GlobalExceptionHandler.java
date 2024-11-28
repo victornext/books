@@ -81,4 +81,17 @@ public class GlobalExceptionHandler {
         errors.put("status", HttpStatus.BAD_REQUEST.value());
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
+
+    // Tratamento para erros genéricos (500 - Internal Server Error)
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<?> handleGenericException(Exception e) {
+        Map<String, Object> body = new HashMap<>();
+        body.put("timestamp", LocalDateTime.now());
+        body.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
+        body.put("error", "Internal Server Error");
+        body.put("message", e.getMessage()); // Mensagem da exceção
+        body.put("details", "An unexpected error occurred. Please contact support if the problem persists.");
+
+        return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }

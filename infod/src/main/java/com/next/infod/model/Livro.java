@@ -1,5 +1,6 @@
 package com.next.infod.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.next.infod.Enums.GeneroLivro;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -10,7 +11,7 @@ import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -50,13 +51,13 @@ public class Livro {
     @NotNull
     private BigDecimal preco;
 
-    @ManyToOne(fetch = FetchType.LAZY)  // Relação ManyToOne com BooksModel
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tb_books")
-    @JsonBackReference // Marca o lado "dependente" da relação
+    @JsonBackReference // Evita referência circular
     private BooksModel books;
 
     @LastModifiedDate
     @Column(name = "data_atualizacao")
     private LocalDateTime dataAtualizacao;
-
 }
+

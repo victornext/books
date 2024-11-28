@@ -94,7 +94,9 @@ public class BooksService {
 
 
 
-
+    public Optional<BooksModel> obterPorId(UUID id){
+        return repositorio.findById(id);
+    }
 
 
 

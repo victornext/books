@@ -9,6 +9,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -36,7 +37,7 @@ public class BooksModel {
     private String nationality;
 
     @OneToMany(mappedBy = "books", fetch = FetchType.LAZY)
-    @JsonManagedReference // Marca o lado "mestre" da relação
+    @JsonManagedReference // Indica que a lista de livros será serializada
     private List<Livro> livros;
 
     @CreatedDate
@@ -49,3 +50,4 @@ public class BooksModel {
 
     public BooksModel() {}
 }
+

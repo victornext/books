@@ -1,6 +1,7 @@
 package com.next.infod.controller;
 
 import com.next.infod.controller.DTOS.CadastroLivroDTO;
+import com.next.infod.controller.DTOS.ResultadoPesquisaLivroDTO;
 import com.next.infod.controller.mappers.LivroMapper;
 import com.next.infod.model.Livro;
 import com.next.infod.services.LivroService;
@@ -54,5 +55,15 @@ public class LivroController implements GenericController {
     @DeleteMapping("delete/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") UUID id){
         return service.Delete(id);
+    }
+
+
+    @GetMapping("{id}")
+    public ResponseEntity<ResultadoPesquisaLivroDTO> obterDetalhes(@PathVariable("id") String id) {
+            return service.obterPorId(UUID.fromString(id))
+                    .map(livro -> {
+                        var dto = mapper.toDTO(livro);
+                        return ResponseEntity.ok(dto);
+                    }).orElseGet( () -> ResponseEntity.notFound().build());
     }
 }
