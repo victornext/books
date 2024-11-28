@@ -84,7 +84,7 @@ public class LivroService {
             String titulo,
             String autor,
             GeneroLivro genero,
-            LocalDate dataPublicacao){
+            Integer anoPublicacao){
 
 //        Specification<Livro> specs = Specification
 //                .where(LivroSpecs.isbnEqual(isbn))
@@ -108,6 +108,9 @@ public class LivroService {
             specs = specs.and(LivroSpecs.generoEqual(genero));
         }
 
+        if(anoPublicacao != null) {
+            specs = specs.and(LivroSpecs.AnoPublicacaoEqual(anoPublicacao));
+        }
 
         Specification<Livro> isbnEqual = (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get("isbn"), isbn);
 

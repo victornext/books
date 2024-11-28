@@ -87,9 +87,9 @@ public class LivroController implements GenericController {
             @RequestParam(value = "genero", required = false)
             GeneroLivro genero,
             @RequestParam(value = "dataPublicacao", required = false)
-            LocalDate dataPublicacao
+            Integer anoPublicacao
     ) {
-        var resultado = service.pesquisa(isbn, titulo, autor, genero, dataPublicacao);
+        var resultado = service.pesquisa(isbn, titulo, autor, genero, anoPublicacao);
         var lista = resultado.
                 stream().
                 map(mapper::toDTO)
