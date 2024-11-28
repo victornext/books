@@ -7,11 +7,14 @@ import com.next.infod.controller.LivroController;
 import com.next.infod.exceptions.LivroNaoEncontrado;
 import com.next.infod.model.Livro;
 import com.next.infod.repositories.LivroRepository;
+import com.next.infod.repositories.specs.LivroSpecs;
 import com.next.infod.validator.LivroValidator;
 import lombok.AllArgsConstructor;
 import org.apache.coyote.Response;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.rsocket.RSocketProperties;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -67,19 +70,49 @@ public class LivroService {
     }
 
 
-    public ResponseEntity<Object> Delete(UUID id) {
-        Optional<Livro> livro0 = repositorio.findById(id);
-
-        if(livro0.isEmpty()){
-            throw new LivroNaoEncontrado("Livro não localizado!    ID: "+ id);
-        }
-
-        repositorio.delete(livro0.get());
-        return ResponseEntity.status(HttpStatus.OK).body("Objeto deletado com sucesso!!");
+    public void Delete(Livro livro) {
+        repositorio.delete(livro);
     }
 
 
     public Optional<Livro> obterPorId(UUID id){
         return repositorio.findById(id);
+    }
+
+    public List<Livro> pesquisa(
+            String isbn,
+            String titulo,
+            String autor,
+            GeneroLivro genero,
+            LocalDate dataPublicacao){
+
+//        Specification<Livro> specs = Specification
+//                .where(LivroSpecs.isbnEqual(isbn))
+//                .and(LivroSpecs.tituloLike(titulo))
+//                .and(LivroSpecs.generoEqual(genero))
+//                ;
+
+
+        Specification<Livro> specs = Specification.where((root, query, cb) -> cb.conjunction());
+
+
+        if(isbn != null ){
+            specs = specs.and(LivroSpecs.isbnEqual(isbn));
+        }
+
+        if(titulo != null) {
+            specs = specs.and(LivroSpecs.tituloLike(titulo));
+        }
+
+        if(genero != null) {
+            specs = specs.and(LivroSpecs.generoEqual(genero));
+        }
+
+
+        Specification<Livro> isbnEqual = (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get("isbn"), isbn);
+
+
+
+        return repositorio.findAll(specs);
     }
 }
