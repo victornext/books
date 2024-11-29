@@ -13,6 +13,9 @@ import lombok.AllArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -76,12 +79,14 @@ public class LivroService {
         return repositorio.findById(id);
     }
 
-    public List<Livro> pesquisa(
+    public Page<Livro> pesquisa(
             String isbn,
             String titulo,
             String autor,
             GeneroLivro genero,
-            Integer anoPublicacao){
+            Integer anoPublicacao,
+            Integer pagina,
+            Integer tamanhaPagina){
 
 //        Specification<Livro> specs = Specification
 //                .where(LivroSpecs.isbnEqual(isbn))
@@ -114,9 +119,9 @@ public class LivroService {
         }
 
 
+        Pageable pageRequest = PageRequest.of(pagina, tamanhaPagina);
 
 
-
-        return repositorio.findAll(specs);
+        return repositorio.findAll(specs, pageRequest);
     }
 }
