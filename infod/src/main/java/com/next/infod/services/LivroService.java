@@ -1,9 +1,8 @@
 package com.next.infod.services;
 
 
-import com.next.infod.controller.DTOS.CadastroLivroDTO;
 import com.next.infod.Enums.GeneroLivro;
-import com.next.infod.controller.LivroController;
+
 import com.next.infod.exceptions.Illegal;
 import com.next.infod.exceptions.LivroNaoEncontrado;
 import com.next.infod.model.Livro;
@@ -11,18 +10,14 @@ import com.next.infod.repositories.LivroRepository;
 import com.next.infod.repositories.specs.LivroSpecs;
 import com.next.infod.validator.LivroValidator;
 import lombok.AllArgsConstructor;
-import lombok.val;
-import org.apache.coyote.Response;
-import org.springframework.beans.BeanUtils;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.rsocket.RSocketProperties;
+
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -118,7 +113,7 @@ public class LivroService {
             specs = specs.and(LivroSpecs.NomeAutorLike(autor));
         }
 
-        Specification<Livro> isbnEqual = (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get("isbn"), isbn);
+
 
 
 

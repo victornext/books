@@ -1,6 +1,7 @@
 package com.next.infod.validator;
 
 import com.next.infod.exceptions.ArquivoDuplicado;
+import com.next.infod.exceptions.CampoInvalido;
 import com.next.infod.exceptions.Illegal;
 import com.next.infod.model.Livro;
 import com.next.infod.repositories.LivroRepository;
@@ -17,10 +18,12 @@ import java.util.Optional;
 public class LivroValidator {
 
     private final LivroRepository repositorio;
+    private  static final int AND_EXIGENCIA_PRECO = 2020;
 
     public void validar(Livro livro) {
         verificarDuplicidade(livro);  // Verifica duplicidade completa
         exiteLivroIsbn(livro);  // Verifica igualdade de título
+
     }
 
     // Verifica se existe um livro com os mesmos dados (exceto ID)
@@ -29,7 +32,16 @@ public class LivroValidator {
                 throw new ArquivoDuplicado("Isbn ja cadastrado existente!");
             }
 
+            if(isPrecoObrigatorio(livro)){
+                throw new CampoInvalido("preco", "Para livros com ano de publicação a partir de 2020, o preço é obrigatorio!");
+            }
 
+    }
+
+
+    private boolean isPrecoObrigatorio(Livro livro){
+        return livro.getPreco() == null &&
+                livro.getDataPublicacao().getYear() >= AND_EXIGENCIA_PRECO;
     }
 
 
@@ -39,6 +51,14 @@ public class LivroValidator {
             return LivroEncontrado.isPresent();
         }
 
-        return LivroEncontrado.map(livro::getId).stream().anyMatch(id -> !id.equals(livro.getId()));
+        return LivroEncontrado
+                .map(Livro::getId)
+                .stream()
+                .anyMatch(id -> !id.equals(livro.getId()));
     }
+
+
+
+
+
 }

@@ -79,7 +79,7 @@ public class LivroController implements GenericController {
     }
 
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<ResultadoPesquisaLivroDTO> obterDetalhes(@PathVariable("id") String id) {
             return service.obterPorId(UUID.fromString(id))
                     .map(livro -> {

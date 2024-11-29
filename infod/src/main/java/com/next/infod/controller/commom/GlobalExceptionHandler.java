@@ -1,9 +1,6 @@
 package com.next.infod.controller.commom;
 
-import com.next.infod.exceptions.ArquivoDuplicado;
-import com.next.infod.exceptions.Illegal;
-import com.next.infod.exceptions.LivroNaoEncontrado;
-import com.next.infod.exceptions.NaoAutorizadaException;
+import com.next.infod.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -94,4 +91,16 @@ public class GlobalExceptionHandler {
 
         return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @ExceptionHandler(CampoInvalido.class)
+    public ResponseEntity<?> CampoInvalido(CampoInvalido e) {
+        Map<String, Object> body = new HashMap<>();
+        body.put("timestamp: ", LocalDateTime.now());
+        body.put("status: ", HttpStatus.NOT_FOUND.value());
+        body.put("error", "Campo preço em livros a partir de 2020 é obrigatorio!");
+        body.put("message:", e.getMessage());
+
+        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
+    }
+
 }
