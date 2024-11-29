@@ -11,6 +11,7 @@ import com.next.infod.repositories.LivroRepository;
 import com.next.infod.repositories.specs.LivroSpecs;
 import com.next.infod.validator.LivroValidator;
 import lombok.AllArgsConstructor;
+import lombok.val;
 import org.apache.coyote.Response;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +35,10 @@ public class LivroService {
     @Autowired
     private final LivroValidator validator;
 
-    public ResponseEntity<Livro> create(Livro cadastro) {
+    public ResponseEntity<Livro> create(Livro livro) {
         //Persistindo no repositório
-        Livro savedLivro = repositorio.save(cadastro);
+        validator.validar(livro);
+        Livro savedLivro = repositorio.save(livro);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(savedLivro);
     }
@@ -63,6 +65,8 @@ public class LivroService {
             throw new Illegal("Para atualizar o livro tem que estar na base!");
         }
 
+
+        validator.validar(livro) ;
         repositorio.save(livro);
         return ResponseEntity.ok().build();
     }

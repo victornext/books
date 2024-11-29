@@ -15,6 +15,8 @@ public record CadastroLivroDTO(
         @NotBlank(message = "campo obrigatorio")
         String titulo,
 
+
+        @Past(message = "nao pode ser uma data futura")
         LocalDate dataPublicacao,
 
         @NotNull(message = "campo obrigatorio")
