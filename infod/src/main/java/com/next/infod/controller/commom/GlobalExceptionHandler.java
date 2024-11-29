@@ -96,11 +96,11 @@ public class GlobalExceptionHandler {
     public ResponseEntity<?> CampoInvalido(CampoInvalido e) {
         Map<String, Object> body = new HashMap<>();
         body.put("timestamp: ", LocalDateTime.now());
-        body.put("status: ", HttpStatus.NOT_FOUND.value());
+        body.put("status: ", HttpStatus.UNPROCESSABLE_ENTITY.value());
         body.put("error", "Campo preço em livros a partir de 2020 é obrigatorio!");
         body.put("message:", e.getMessage());
 
-        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(body, HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
 }
