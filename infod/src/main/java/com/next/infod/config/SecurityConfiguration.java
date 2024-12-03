@@ -19,6 +19,8 @@ public class SecurityConfiguration {
         return http
                 .csrf(AbstractHttpConfigurer::disable)//Para aplicações web
                 .formLogin(Customizer.withDefaults()) //Para ela receber autenticação via login
+                .formLogin(configurer ->
+                        configurer.loginPage("/login").permitAll()) //Formulario padrao
                 .httpBasic(Customizer.withDefaults()) //
                 .authorizeHttpRequests(authorizer ->{
                     authorizer.anyRequest().authenticated();  //Para toda requisicao nessa API tem que estar autenticado
