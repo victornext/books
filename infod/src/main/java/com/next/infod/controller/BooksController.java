@@ -12,6 +12,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Repository;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -53,23 +54,27 @@ public class BooksController implements GenericController {
     }
 
     @GetMapping(value = "/findAll")
+    @PreAuthorize("hasAnyRole('OPERADOR', 'GERENTE')")
     public ResponseEntity<List<BooksModel>> findAll(){
         return services.FindAll();
     }
 
 
     @DeleteMapping(value = "/delete/{id}")
+    @PreAuthorize("hasAnyRole('OPERADOR', 'GERENTE')")
     ResponseEntity<Object> Delete(@PathVariable(value = "id") UUID id){
         return services.Delete(id);
     }
 
 
     @GetMapping(value =  "get/{id}")
+    @PreAuthorize("hasAnyRole('OPERADOR', 'GERENTE')")
     public ResponseEntity<Object> findById(@PathVariable(value = "id") UUID id) {
         return services.findById(id);
     }
 
     @GetMapping(value = "/pesquisa")
+    @PreAuthorize("hasAnyRole('OPERADOR', 'GERENTE')")
     public ResponseEntity<List<BooksDTO>> pesquisar(
             @RequestParam(value ="autor", required = false) String autor,
             @RequestParam(value = "nationality", required = false) String nationality) {

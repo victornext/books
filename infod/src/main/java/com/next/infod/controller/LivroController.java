@@ -10,6 +10,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,6 +31,7 @@ public class LivroController implements GenericController {
     private final LivroMapper mapper;
 
     @PostMapping("/create")
+    @PreAuthorize("hasAnyRole('OPERADOR', 'GERENTE')")
     public ResponseEntity<Livro> create(@RequestBody @Valid CadastroLivroDTO dto) {
         Livro livro = mapper.toEntity(dto);
         service.create(livro);
@@ -41,16 +43,19 @@ public class LivroController implements GenericController {
 
 
     @GetMapping("/findall")
+    @PreAuthorize("hasAnyRole('OPERADOR', 'GERENTE')")
     public ResponseEntity<List<Livro>> findAll() {
         return service.findAll();
     }
 
     @GetMapping("/find/{id}")
+    @PreAuthorize("hasAnyRole('OPERADOR', 'GERENTE')")
     public ResponseEntity<Livro> findById(@PathVariable(value = "id") UUID id) {
         return service.findById(id);
     }
 
     @PutMapping("/update/{id}")
+    @PreAuthorize("hasAnyRole('OPERADOR', 'GERENTE')")
     public ResponseEntity<?> update(@PathVariable(value = "id") String id, @RequestBody @Valid CadastroLivroDTO DTO){
         return service.obterPorId(UUID.fromString(id))
                 .map(livro -> {
@@ -70,6 +75,7 @@ public class LivroController implements GenericController {
 
 
     @DeleteMapping("delete/{id}")
+    @PreAuthorize("hasAnyRole('OPERADOR', 'GERENTE')")
     public ResponseEntity<Object> delete(@PathVariable(value = "id") String id){
         return service.obterPorId((UUID.fromString(id)))
                 .map(livro -> {
@@ -81,6 +87,7 @@ public class LivroController implements GenericController {
 
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('OPERADOR', 'GERENTE')")
     public ResponseEntity<ResultadoPesquisaLivroDTO> obterDetalhes(@PathVariable("id") String id) {
             return service.obterPorId(UUID.fromString(id))
                     .map(livro -> {
