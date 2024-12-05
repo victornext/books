@@ -7,16 +7,22 @@ import com.next.infod.controller.DTOS.ErrorResponse;
 import com.next.infod.controller.mappers.BooksMapper;
 import com.next.infod.exceptions.ArquivoDuplicado;
 import com.next.infod.model.BooksModel;
+import com.next.infod.model.Usuario;
+import com.next.infod.security.SecurityService;
 import com.next.infod.services.BooksService;
+import com.next.infod.services.UsuarioService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.Authenticator;
 import java.net.URI;
 import java.util.List;
 import java.util.UUID;
@@ -32,7 +38,10 @@ public class BooksController implements GenericController {
 
 
     @PostMapping(value = "/create" )
+    @PreAuthorize("hasRole('GERENTE')")
     public ResponseEntity<?> create(@RequestBody @Valid BooksDTO dto){
+
+
         BooksModel books = mapper.toEntity(dto);
         services.Create(books);
 

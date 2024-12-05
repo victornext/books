@@ -48,6 +48,11 @@ public class BooksModel {
     @Column(name =  "data_atualizacao")
     private LocalDateTime dataAtualizacao;
 
+
+    @ManyToOne
+    @JoinColumn(name = "id_usuario")
+    private Usuario usuario;
+
     public BooksModel() {}
 }
 

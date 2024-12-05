@@ -4,9 +4,12 @@ import com.next.infod.controller.DTOS.BooksDTO;
 import com.next.infod.exceptions.ArquivoDuplicado;
 import com.next.infod.exceptions.LivroNaoEncontrado;
 import com.next.infod.model.BooksModel;
+import com.next.infod.model.Usuario;
 import com.next.infod.repositories.BooksRepository;
+import com.next.infod.security.SecurityService;
 import com.next.infod.validator.AutorValidator;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -23,19 +26,19 @@ import java.util.UUID;
 
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class BooksService {
-    @Autowired
+
     private  final BooksRepository repositorio;
-    @Autowired
+    private final SecurityService securityService;
     private  final AutorValidator validator;
 
 
     public ResponseEntity<BooksModel> Create(BooksModel books) {
-        var booksmodel = new BooksModel();
-        BeanUtils.copyProperties(books, booksmodel);
-        //validator.validar(booksmodel);
-        BooksModel savedBook = repositorio.save(booksmodel);
+        validator.validar(books);
+        Usuario usuario = securityService.obterUsuarioLogado();
+        books.setUsuario(usuario);
+        BooksModel savedBook = repositorio.save(books);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedBook);
     }
 

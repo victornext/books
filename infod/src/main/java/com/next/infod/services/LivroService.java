@@ -6,11 +6,14 @@ import com.next.infod.Enums.GeneroLivro;
 import com.next.infod.exceptions.Illegal;
 import com.next.infod.exceptions.LivroNaoEncontrado;
 import com.next.infod.model.Livro;
+import com.next.infod.model.Usuario;
 import com.next.infod.repositories.LivroRepository;
 import com.next.infod.repositories.specs.LivroSpecs;
+import com.next.infod.security.SecurityService;
 import com.next.infod.validator.LivroValidator;
 import lombok.AllArgsConstructor;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.data.domain.Page;
@@ -26,16 +29,20 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class LivroService {
-    @Autowired
+
     private final LivroRepository repositorio;
-    @Autowired
+
     private final LivroValidator validator;
+
+    private final SecurityService securityService;
 
     public ResponseEntity<Livro> create(Livro livro) {
         //Persistindo no repositório
         validator.validar(livro);
+        Usuario usuario = securityService.obterUsuarioLogado();
+        livro.setUsuario(usuario);
         Livro savedLivro = repositorio.save(livro);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(savedLivro);
