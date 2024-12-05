@@ -1,6 +1,8 @@
 package com.next.infod.config;
 
 
+import com.next.infod.security.CustomUserDetailsService;
+import com.next.infod.services.UsuarioService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -49,21 +51,7 @@ public class SecurityConfiguration {
 
 
     @Bean
-    public UserDetailsService userDetailsService(PasswordEncoder encoder) {
-            UserDetails user1 = User.builder()
-                    .username("usuario1")
-                    .password(encoder.encode("123"))
-                    .roles("USER") //Sempre caixa alta
-                    .build();
-
-
-        UserDetails user2 = User.builder()
-                .username("usuario2")
-                .password(encoder.encode("321"))
-                .roles("ADMIN") //Sempre caixa alta
-                .build();
-
-
-            return  new InMemoryUserDetailsManager(user1, user2);
+    public UserDetailsService userDetailsService(UsuarioService usuarioService) {
+        return new CustomUserDetailsService(usuarioService);
     }
 }
