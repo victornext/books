@@ -3,6 +3,7 @@ package com.next.infod.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -31,6 +32,10 @@ public class SecurityConfiguration {
                         configurer.loginPage("/login").permitAll()) //Formulario padrao
                 .httpBasic(Customizer.withDefaults()) //
                 .authorizeHttpRequests(authorizer ->{
+                    authorizer.requestMatchers("/login/**").permitAll();
+                    authorizer.requestMatchers(HttpMethod.POST, "/usuarios/**").permitAll();
+                    authorizer.requestMatchers("/autores/**").hasRole("ADMIN");
+                    authorizer.requestMatchers("/livros/**").hasAnyRole("USER", "ADMIN");
                     authorizer.anyRequest().authenticated();  //Para toda requisicao nessa API tem que estar autenticado
                 })
                 .build();
