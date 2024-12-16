@@ -3,8 +3,8 @@ spring:
     name: libraryapi
   datasource:
     url: jdbc:postgresql://localhost:5433/library
-    username: ${DATABASE_USERNAME:postgres}
-    password: ${DATABASE_PASSWORD:postgres}
+    username: postgres
+    password: postgres
     driver-class-name: org.postgresql.Driver
   jpa:
     show-sql: true
@@ -17,5 +17,5 @@ spring:
       client:
         registration:
           google:
-            client-id: ${GOOGLE_CLIENT_IDS}
-            client-secret: ${GOOGLE_CLIENT_SECRETS}
+            client-id: 840054770996-7dt4qsmlfdtauwmk881q0g6u5t8a20.apps.googleusercontent.com
+            client-secret: GOCSPX-QBFr9nej-LazxLAG5offrAWHZDR
