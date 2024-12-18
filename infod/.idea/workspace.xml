@@ -4,62 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0c47f1e6-805d-45cb-8593-059eceb30f69" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/next/infod/controller/DTOS/UsuarioDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/next/infod/controller/DTOS/UsuarioDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/next/infod/controller/UsuarioController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/next/infod/controller/UsuarioController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/next/infod/model/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/next/infod/model/Usuario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/Enums/GeneroLivro.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/InfodApplication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/config/SecurityConfiguration.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/config/WebConfiguration.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/controller/BooksController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/controller/DTOS/BooksDTO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/controller/DTOS/CadastroLivroDTO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/controller/DTOS/ErroDTO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/controller/DTOS/ErrorResponse.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/controller/DTOS/RespostadeErro.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/controller/DTOS/ResultadoPesquisaLivroDTO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/controller/DTOS/UsuarioDTO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/controller/GenericController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/controller/LivroController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/controller/LoginViewController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/controller/UsuarioController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/controller/commom/GlobalExceptionHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/controller/mappers/BooksMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/controller/mappers/BooksMapperImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/controller/mappers/LivroMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/controller/mappers/LivroMapperImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/controller/mappers/UsuarioMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/controller/mappers/UsuarioMapperImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/exceptions/ArquivoDuplicado.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/exceptions/CampoInvalido.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/exceptions/Illegal.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/exceptions/LivroNaoEncontrado.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/exceptions/NaoAutorizadaException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/model/BooksModel.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/model/Livro.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/model/Usuario.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/repositories/BooksRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/repositories/LivroRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/repositories/UsuarioRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/repositories/specs/LivroSpecs.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/security/CustomAuthentication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/security/CustomUserDetailsService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/security/SecurityService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/services/BooksService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/services/LivroService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/services/UsuarioService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/validator/AutorValidator.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/validator/LivroValidator.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/generated-sources/annotations/com/next/infod/controller/mappers/BooksMapperImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/generated-sources/annotations/com/next/infod/controller/mappers/LivroMapperImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/generated-sources/annotations/com/next/infod/controller/mappers/UsuarioMapperImpl.java" beforeDir="false" />
-    </list>
+    <list default="true" id="0c47f1e6-805d-45cb-8593-059eceb30f69" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
