@@ -11,13 +11,11 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
 @RequiredArgsConstructor
 @Getter
 public class CustomAuthentication implements Authentication {
 
     private final Usuario usuario;
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -45,12 +43,12 @@ public class CustomAuthentication implements Authentication {
 
     @Override
     public boolean isAuthenticated() {
-        return true; //Se deixar false nao consegue logar
+        return true; // Se deixar false, não consegue logar
     }
 
     @Override
     public void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException {
-
+        // Não precisa fazer nada aqui, pois o método não será utilizado
     }
 
     @Override
