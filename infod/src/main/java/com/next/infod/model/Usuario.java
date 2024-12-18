@@ -23,10 +23,14 @@ public class Usuario {
     private String login;
 
     @Column
+    private String email;
+
+    @Column
     private String senha;
 
     @Column(name = "roles", columnDefinition = "varchar[]")
     @Type(ListArrayType.class) //Faz a tradução de lista pra array
     private List<String> roles;
+
 
 }
