@@ -1,6 +1,7 @@
 package com.next.infod.config;
 
 import com.next.infod.security.CustomUserDetailsService;
+import com.next.infod.security.LoginSocialSucessHandler;
 import com.next.infod.services.UsuarioService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,7 +24,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfiguration {
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, LoginSocialSucessHandler sucessHandler) throws Exception {
         return http
                 .csrf(AbstractHttpConfigurer::disable) // Para aplicações web
                 .formLogin(Customizer.withDefaults()) // Para ela receber autenticação via login
@@ -36,7 +37,9 @@ public class SecurityConfiguration {
                     authorizer.requestMatchers(HttpMethod.POST, "/usuarios/**").permitAll();
                     authorizer.anyRequest().authenticated(); // Para toda requisição nessa API tem que estar autenticado
                 })
-                .oauth2Login(Customizer.withDefaults()) // OAuth2 login
+                .oauth2Login(oauth2 -> {
+                    oauth2.successHandler(sucessHandler);
+                }) // OAuth2 login
                 .build();
     }
 
