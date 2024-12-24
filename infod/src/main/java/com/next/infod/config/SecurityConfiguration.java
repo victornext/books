@@ -31,14 +31,15 @@ public class SecurityConfiguration {
                 .formLogin(configurer ->
                         configurer.loginPage("/login").
                                 permitAll()) // Formulário padrão
-                .httpBasic(Customizer.withDefaults()) //
                 .authorizeHttpRequests(authorizer -> {
                     authorizer.requestMatchers("/login/**").permitAll();
                     authorizer.requestMatchers(HttpMethod.POST, "/usuarios/**").permitAll();
                     authorizer.anyRequest().authenticated(); // Para toda requisição nessa API tem que estar autenticado
                 })
                 .oauth2Login(oauth2 -> {
-                    oauth2.successHandler(sucessHandler);
+                    oauth2
+                    .loginPage("/login")
+                    .successHandler(sucessHandler);
                 }) // OAuth2 login
                 .build();
     }
