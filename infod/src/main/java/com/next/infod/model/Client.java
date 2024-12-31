@@ -22,7 +22,6 @@ public class Client {
     @Column(name = "client_secret")
     private String clientSecret;
 
-
     @Column(name = "redirect_uri")
     private String redirectURI;
 
