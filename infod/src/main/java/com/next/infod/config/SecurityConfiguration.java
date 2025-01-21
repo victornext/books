@@ -31,21 +31,22 @@ public class SecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable) // Para aplicações web
                 .formLogin(Customizer.withDefaults()) // Para ela receber autenticação via login
                 .formLogin(configurer ->
-                        configurer.loginPage("/login").
-                                permitAll()) // Formulário padrão
+                        configurer.loginPage("/login").permitAll()) // Formulário padrão
                 .authorizeHttpRequests(authorizer -> {
                     authorizer.requestMatchers("/login/**").permitAll();
                     authorizer.requestMatchers(HttpMethod.POST, "/usuarios/**").permitAll();
                     authorizer.anyRequest().authenticated(); // Para toda requisição nessa API tem que estar autenticado
                 })
+                .httpBasic(Customizer.withDefaults())  // Habilita HTTP Basic Authentication
                 .oauth2Login(oauth2 -> {
                     oauth2
-                    .loginPage("/login")
-                    .successHandler(sucessHandler);
+                            .loginPage("/login")
+                            .successHandler(sucessHandler);
                 }) // OAuth2 login
                 .oauth2ResourceServer(oauth2Rs -> oauth2Rs.jwt(Customizer.withDefaults()))
                 .build();
     }
+
 
 
 
