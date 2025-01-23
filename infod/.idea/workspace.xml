@@ -28,10 +28,12 @@
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectColorInfo">{
-  &quot;customColor&quot;: &quot;&quot;,
-  &quot;associatedIndex&quot;: 3
-}</component>
+  <component name="ProjectColorInfo">
+    {
+    "customColor": "",
+    "associatedIndex": 3
+    }
+  </component>
   <component name="ProjectId" id="2qOtVBOlib64t7rl8iUbLNVtHqp" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
