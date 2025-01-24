@@ -2,10 +2,10 @@ spring:
   application:
     name: libraryapi
   datasource:
-    url: jdbc:postgresql://localhost:5433/library
+    url: ${DB_URL}
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
-    driver-class-name: org.postgresql.Driver
+    driver-class-name: ${DB_DRIVER}
   jpa:
     show-sql: true
     hibernate:

@@ -36,7 +36,7 @@ public class Livro {
 
     @NotBlank
     @Column(name = "titulo", nullable = false)
-    @Size(min = 2, max = 150)
+    @Size(min = 2, max = 255)
     private String titulo;
 
     @CreatedDate
