@@ -120,6 +120,12 @@ public class AuthorizationServerConfiguration {
                 .tokenRevocationEndpoint("/oauth2/revoke")
                 //authorization endpoint
                 .authorizationEndpoint("/oauth2/authorize")
+                //informações do usuario OPEN ID CONNECT
+                .oidcClientRegistrationEndpoint("/oauth2/userinfo")
+                //obter a chave publica pra verificar assinatura do token
+                .jwkSetEndpoint("/oauth2/jwks")
+                //logout
+                .oidcLogoutEndpoint("/oauth2/logout")
                 .build();
     }
 }
