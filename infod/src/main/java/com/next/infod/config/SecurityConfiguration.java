@@ -1,6 +1,7 @@
 package com.next.infod.config;
 
 import com.next.infod.security.CustomUserDetailsService;
+import com.next.infod.security.JWTCustomAuthenticationFilter;
 import com.next.infod.security.LoginSocialSucessHandler;
 import com.next.infod.services.UsuarioService;
 import org.springframework.context.annotation.Bean;
@@ -17,6 +18,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
+import org.springframework.security.oauth2.server.resource.web.authentication.BearerTokenAuthenticationFilter;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -26,7 +28,11 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfiguration {
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http, LoginSocialSucessHandler sucessHandler) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http,
+                                                   LoginSocialSucessHandler
+                                                           sucessHandler,
+                                                   JWTCustomAuthenticationFilter jwtCustomAuthenticationFilter
+                                                   ) throws Exception {
         return http
                 .csrf(AbstractHttpConfigurer::disable) // Para aplicações web
                 .formLogin(Customizer.withDefaults()) // Para ela receber autenticação via login
@@ -44,6 +50,7 @@ public class SecurityConfiguration {
                             .successHandler(sucessHandler);
                 }) // OAuth2 login
                 .oauth2ResourceServer(oauth2Rs -> oauth2Rs.jwt(Customizer.withDefaults()))
+                .addFilterAfter(jwtCustomAuthenticationFilter, BearerTokenAuthenticationFilter.class)
                 .build();
     }
 
