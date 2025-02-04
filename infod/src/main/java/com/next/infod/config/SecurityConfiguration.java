@@ -44,7 +44,6 @@ public class SecurityConfiguration {
                     authorizer.requestMatchers(HttpMethod.POST, "/usuarios/**").permitAll();
                     authorizer.anyRequest().authenticated(); // Para toda requisição nessa API tem que estar autenticado
                 })
-                .httpBasic(Customizer.withDefaults())  // Habilita HTTP Basic Authentication
                 .oauth2Login(oauth2 -> {
                     oauth2
                             .loginPage("/login")
@@ -67,7 +66,7 @@ public class SecurityConfiguration {
 
             );
         }
-    }
+
 
 
     //Configura o prefixo ROLE que vem do banco de dados por exemplo ROLE_GERENTE
@@ -89,3 +88,4 @@ public class SecurityConfiguration {
     }
 
 }
+
