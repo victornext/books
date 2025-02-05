@@ -5,72 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0c47f1e6-805d-45cb-8593-059eceb30f69" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/next/infod/config/OpenAPiConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/next/infod/config/OpenAPiConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/next/infod/config/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/next/infod/config/SecurityConfiguration.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/next/infod/controller/BooksController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/next/infod/controller/BooksController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/next/infod/controller/DTOS/BooksDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/next/infod/controller/DTOS/BooksDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/Enums/GeneroLivro.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/InfodApplication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/config/AuthorizationServerConfiguration.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/config/SecurityConfiguration.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/config/WebConfiguration.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/controller/BooksController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/controller/ClientController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/controller/DTOS/BooksDTO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/controller/DTOS/CadastroLivroDTO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/controller/DTOS/ClientDTO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/controller/DTOS/ErroDTO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/controller/DTOS/ErrorResponse.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/controller/DTOS/RespostadeErro.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/controller/DTOS/ResultadoPesquisaLivroDTO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/controller/DTOS/UsuarioDTO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/controller/GenericController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/controller/LivroController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/controller/LoginViewController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/controller/UsuarioController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/controller/commom/GlobalExceptionHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/controller/mappers/BooksMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/controller/mappers/ClientMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/controller/mappers/LivroMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/controller/mappers/UsuarioMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/exceptions/ArquivoDuplicado.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/exceptions/CampoInvalido.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/exceptions/Illegal.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/exceptions/LivroNaoEncontrado.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/exceptions/NaoAutorizadaException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/model/BooksModel.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/model/Client.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/model/Livro.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/model/Usuario.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/repositories/BooksRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/repositories/ClientRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/repositories/LivroRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/repositories/UsuarioRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/repositories/specs/LivroSpecs.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/security/CustomAuthentication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/security/CustomAutheticationProvider.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/security/CustomRegisteredClientRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/security/CustomUserDetailsService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/security/JWTCustomAuthenticationFilter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/security/LoginSocialSucessHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/security/SecurityService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/services/BooksService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/services/ClientService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/services/LivroService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/services/UsuarioService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/validator/AutorValidator.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/validator/ClientValidator.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/validator/LivroValidator.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/next/infod/validator/UsuarioValidator.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/generated-sources/annotations/com/next/infod/controller/mappers/BooksMapperImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/generated-sources/annotations/com/next/infod/controller/mappers/ClientMapperImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/generated-sources/annotations/com/next/infod/controller/mappers/LivroMapperImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/generated-sources/annotations/com/next/infod/controller/mappers/UsuarioMapperImpl.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,22 +41,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.InfodApplication.executor": "Debug",
-    "Maven.infod [clean].executor": "Run",
-    "Maven.infod [install].executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "extract.method.default.visibility": "private",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/elivi/Documents/pst/books-main/infod",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.lookFeel"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.InfodApplication.executor&quot;: &quot;Debug&quot;,
+    &quot;Maven.infod [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.infod [install].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;extract.method.default.visibility&quot;: &quot;private&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/elivi/Documents/pst/books-main/infod&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="InfodApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.next.infod.InfodApplication" />
