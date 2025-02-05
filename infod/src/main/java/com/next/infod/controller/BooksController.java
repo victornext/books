@@ -17,6 +17,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -36,6 +37,7 @@ import java.util.stream.Collectors;
 @RequestMapping("autores")
 @RequiredArgsConstructor
 @Tag(name = "autores")
+@Slf4j
 public class BooksController implements GenericController {
 
     private final BooksMapper mapper;
@@ -52,7 +54,7 @@ public class BooksController implements GenericController {
             @ApiResponse(responseCode = "409", description = "Conflito, quando o autor ja está cadastrado")
     })
     public ResponseEntity<?> create(@RequestBody @Valid BooksDTO dto){
-
+        log.info("Cadastrando novo autor : {}", dto.autor());
 
         BooksModel books = mapper.toEntity(dto);
         services.Create(books);
@@ -108,6 +110,7 @@ public class BooksController implements GenericController {
             @ApiResponse(responseCode = "400", description = "Autor tem livro registrado e não pode ser deletado")
     })
     ResponseEntity<Object> Delete(@PathVariable(value = "id") UUID id){
+        log.info("Autor deletado : {}", id);
         return services.Delete(id);
     }
 

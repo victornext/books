@@ -2,6 +2,7 @@ package com.next.infod.controller.commom;
 
 import com.next.infod.controller.DTOS.ErrorResponse;
 import com.next.infod.exceptions.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestControllerAdvice
+@Slf4j
 public class GlobalExceptionHandler {
 
     // Tratamento para ArquivoDuplicado
@@ -71,6 +73,7 @@ public class GlobalExceptionHandler {
     // Tratamento para validação de parâmetros
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<?> handleValidationExceptions(MethodArgumentNotValidException ex) {
+        log.error("Erro de validação: {}", ex.getMessage());
         Map<String, Object> errors = new HashMap<>();
         ex.getBindingResult().getAllErrors().forEach(error -> {
             String fieldName = ((FieldError) error).getField();
@@ -87,6 +90,7 @@ public class GlobalExceptionHandler {
     // Tratamento para erros genéricos (500 - Internal Server Error)
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> handleGenericException(Exception e) {
+        log.error("Erro inesperado: ", e.getMessage());
         Map<String, Object> body = new HashMap<>();
         body.put("timestamp", LocalDateTime.now());
         body.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
