@@ -17,7 +17,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -37,7 +36,6 @@ import java.util.stream.Collectors;
 @RequestMapping("autores")
 @RequiredArgsConstructor
 @Tag(name = "autores")
-@Slf4j
 public class BooksController implements GenericController {
 
     private final BooksMapper mapper;
@@ -145,13 +143,6 @@ public class BooksController implements GenericController {
     public ResponseEntity<List<BooksDTO>> pesquisar(
             @RequestParam(value ="autor", required = false) String autor,
             @RequestParam(value = "nationality", required = false) String nationality) {
-
-        log.trace("Pesquisa autores");
-        log.debug("Pesquisa autores");
-        log.info("Pesquisa autores");
-        log.warn("Pesquisa autores");
-        log.error("Pesquisa autores");
-
         List<BooksModel> resultado = services.PesquisaByExample(autor, nationality);
         List<BooksDTO> lista = resultado.stream()
                 .map(mapper::toDTO).collect(Collectors.toList());
