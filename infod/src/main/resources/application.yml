@@ -25,14 +25,6 @@ spring:
             client-id: ${GOOGLE_CLIENT_ID}
             client-secret: ${GOOGLE_CLIENT_SECRET}
 
-logging:
-  file:
-    name: libraryapi.log
-  level:
-    root: trace
-    org:
-      springframework:
-        web: debug
 
 management:
   server:
@@ -44,3 +36,14 @@ management:
 
 springdoc:
   override-with-generic-response: false
+
+#production
+---
+spring:
+  config:
+    activate:
+      on-profile: production
+  jpa:
+    show-sql: false
+  datasource:
+    url: jdbc:postgresql://localhost:5433/library

@@ -1,6 +1,11 @@
 spring:
   application:
     name: libraryapi
+  profiles:
+    active: production
+  output:
+    ansi:
+      enabled: ALWAYS
   datasource:
     url: jdbc:postgresql://localhost:5433/library
     username: postgres
@@ -19,3 +24,26 @@ spring:
           google:
             client-id: ${GOOGLE_CLIENT_ID}
             client-secret: ${GOOGLE_CLIENT_SECRET}
+
+
+management:
+  server:
+    port: 9090
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+springdoc:
+  override-with-generic-response: false
+
+#production
+---
+spring:
+  config:
+    activate:
+      on-profile: production
+  jpa:
+    show-sql: false
+  datasource:
+    url: jdbc:postgresql://localhost:5433/library
