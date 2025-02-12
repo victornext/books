@@ -52,8 +52,6 @@
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
 
-
-
 		<dependency>
 			<groupId>io.hypersistence</groupId>
 			<artifactId>hypersistence-utils-hibernate-63</artifactId>
@@ -103,7 +101,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<jvmArguments>--enable-preview</jvmArguments>
+					<!-- Removido -enable-preview -->
 				</configuration>
 			</plugin>
 			<plugin>
@@ -130,11 +128,7 @@
 							<version>${lombok-mapstruct-binding.version}</version>
 						</path>
 					</annotationProcessorPaths>
-					<compilerArgs>
-						<arg>--enable-preview</arg>
-						<arg>--add-exports=java.base/com.sun.tools.javac.tree=ALL-UNNAMED</arg>
-						<arg>--add-exports=java.base/com.sun.tools.javac.api=ALL-UNNAMED</arg>
-					</compilerArgs>
+
 				</configuration>
 			</plugin>
 		</plugins>
