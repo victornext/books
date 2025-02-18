@@ -1,0 +1,108 @@
+
+CREATE TABLE usuario (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    login VARCHAR(255) NOT NULL UNIQUE,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    senha VARCHAR(255) NOT NULL,
+    roles VARCHAR[]
+);
+
+
+
+
+
+
+
+
+
+CREATE TABLE public.tb_book (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    autor VARCHAR(100) NOT NULL,
+    nascimento DATE,
+    nationality VARCHAR(50) NOT NULL,
+    data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    data_atualizacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    id_usuario UUID,
+    CONSTRAINT fk_usuario FOREIGN KEY (id_usuario) REFERENCES usuario(id) ON DELETE SET NULL
+);
+
+INSERT INTO usuario (login, email, senha, roles)
+VALUES ('Gerente', 'gerente@email.com', '$2a$12$xgLDovnQiudxlykzdQTfDeVOwu4F.3cXfTPn65q8mmKGiQl8k6/Ua', '{GERENTE}');
+
+
+
+
+
+
+CREATE OR REPLACE FUNCTION update_data_atualizacao_tb_book()
+RETURNS TRIGGER AS $$
+BEGIN
+    NEW.data_atualizacao = CURRENT_TIMESTAMP;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trigger_update_data_atualizacao_tb_book
+BEFORE UPDATE ON public.tb_book
+FOR EACH ROW
+EXECUTE FUNCTION update_data_atualizacao_tb_book();
+
+
+
+
+
+
+CREATE TABLE livro (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    isbn VARCHAR(20) NOT NULL,
+    titulo VARCHAR(255) NOT NULL,
+    data_publicacao DATE DEFAULT CURRENT_DATE,
+    genero VARCHAR(30) NOT NULL,
+    preco DECIMAL(18,2) NOT NULL,
+    data_atualizacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    tb_books UUID,
+    id_usuario UUID,
+    CONSTRAINT fk_tb_books FOREIGN KEY (tb_books) REFERENCES public.tb_book(id) ON DELETE CASCADE,
+    CONSTRAINT fk_id_usuario FOREIGN KEY (id_usuario) REFERENCES usuario(id) ON DELETE SET NULL
+);
+
+
+
+
+
+
+
+
+CREATE OR REPLACE FUNCTION update_data_atualizacao_livro()
+RETURNS TRIGGER AS $$
+BEGIN
+    NEW.data_atualizacao = CURRENT_TIMESTAMP;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trigger_update_data_atualizacao_livro
+BEFORE UPDATE ON livro
+FOR EACH ROW
+EXECUTE FUNCTION update_data_atualizacao_livro();
+
+
+
+
+
+
+
+
+CREATE TABLE client (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    client_id VARCHAR(255) NOT NULL,
+    client_secret VARCHAR(255) NOT NULL,
+    redirect_uri VARCHAR(255),
+    scope VARCHAR(255)
+);
+
+
+insert into client
+(client_id, client_secret, redirect_uri, scope)
+values
+( uuid_generate_v4(), 'client-production', '$2a$12$0aYuKMZyM2Hv9k2056yyuOWGwi7qmAXF2BsFtG.P8luLn1gBjxkNa', 'http://localhost:8080/authorized' , 'GERENTE')
